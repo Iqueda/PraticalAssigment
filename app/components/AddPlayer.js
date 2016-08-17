@@ -1,7 +1,7 @@
 import React,{ Component } from 'react';
 import { Link } from 'react-router'
 
-class Pedido extends Component {
+class AddPlayer extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -9,31 +9,30 @@ class Pedido extends Component {
 			surname:'',
 			email:'',
 			sex:'male',
-			tier:'gold'
+			tier:'1'
 		}
 		this.onSubmitForm = this.onSubmitForm.bind(this)
 	}
 	onSubmitForm(event) {
 		event.preventDefault();
 		const data = {
-			FIRST_NAME: this.state.firstname,
-			SURNAME: this.state.surname,
-			EMAIL: this.state.email,
-			SEX: this.state.sex,
-			TIER: this.state.tier,
-			created_at: Date.now()
+			firstname: this.state.firstname,
+			surname: this.state.surname,
+			email: this.state.email,
+			sex: this.state.sex,
+			tier: this.state.tier,
 		}
-		console.log(data);
+		this.props.onClickSubmit(data)
 	}
 	render() {
 		const {firstname, surname,email,sex,tier} = this.state
 	return (
-		<div className="jumbotron" style={{background: 'transparent'}}>	
+		<div className="jumbotron" style={{background: 'white', position:'fixed', left:'50%',right:'0', bottom:'0',top:'0', width:600,marginLeft:'-300px'}}>	
 			<div className='container-fluid'>
 				<h1 className='text-center'>Add Player</h1>
-					<form className="form-horizontal col-sm-offset-5" id="form" onSubmit={this.onSubmitForm}>
+					<form className="form-horizontal" id="form" onSubmit={this.onSubmitForm} style={{padding:20}}>
 					<div className='row'>
-						<div className='col-sm-4'>
+						<div className='col-sm-12' >
 							<label htmlFor="firstname">First Name:</label>
 								<input
 								 ref={(node) => {this.fieldName = node }}
@@ -53,7 +52,7 @@ class Pedido extends Component {
 							</div>
 							</div>
 							<div className='row'>
-								<div className='col-sm-2'>
+								<div className='col-sm-4'>
 									<label htmlFor="Sex">Sex:</label>
 									<select
 									className="form-control" 
@@ -66,7 +65,7 @@ class Pedido extends Component {
 										<option value="female">Female</option>
 									</select>
 								</div>
-								<div className='col-sm-2'>
+								<div className='col-sm-4'>
 									<label htmlFor="Tier">Tier:</label>
 										<select 
 										className="form-control"
@@ -75,14 +74,14 @@ class Pedido extends Component {
 										value={tier}
 										type="text" name="tier" id="tier"
 										 >
-										<option value="gold">Gold</option>
-										<option value="silver">Silver</option>
-										<option value="bronze">Bronze</option>
+										<option value="1">Gold</option>
+										<option value="2">Silver</option>
+										<option value="3">Bronze</option>
 									</select>
 							</div>
 							</div>
 							<div className='row'>
-								<div className='col-sm-4'>
+								<div className='col-sm-12' >
 									<label htmlFor="email">Email:</label>
 										<input
 										ref={(node) => {this.fieldEmail = node }}
@@ -93,8 +92,20 @@ class Pedido extends Component {
 										placeholder="Email" />
 								</div>
 							</div>
-						<button type='submit' className='btn btn-primary'>Add</button>
-						<Link to='/' type='button' className='btn btn-danger'>Cancel</Link>
+							<div style={{marginTop:20}}>
+						 <button
+						 type='submit' 
+						 className='btn btn-primary'>
+						 Add
+						 </button>
+						 <button 
+						 onClick= {() => this.props.onClickCancel()}
+						 type='button' 
+						 className='btn btn-danger'
+						 style={{marginLeft:10}}>
+						 Cancel
+						 </button>
+						 </div>
 					</form>
 					</div>
 				</div>
@@ -102,4 +113,4 @@ class Pedido extends Component {
 	}
 }
 
-export default Pedido
+export default AddPlayer
