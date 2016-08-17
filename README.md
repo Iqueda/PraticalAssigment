@@ -6,7 +6,7 @@ Didn't put the data in alphabetic order and make the fields on the modal require
 
 Examples:
 
-#  componentDidMount (){
+         componentDidMount (){
         fetch("/data.json").then((data) =>{
             return data.json()
         }).then((json) => {
